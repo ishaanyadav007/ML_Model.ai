@@ -87,6 +87,7 @@ if file:
             for name, model in models.items():
                 model.fit(xtrain, ytrain)
                 ypred = model.predict(xtest)
+                yprob = model.predict_proba(xtest)
                 
                 results.append({
                     'Model_name': name,
@@ -94,7 +95,7 @@ if file:
                     'Precision': precision_score(ytest, ypred,average='weighted'),
                     'Recall': recall_score(ytest, ypred,average='weighted'),
                     'F1 Score': f1_score(ytest, ypred,average='weighted'),
-                    'ROC AUC': roc_auc_score(ytest, ypred,multi_class='ovr')
+                    'ROC AUC': roc_auc_score(ytest, yprob ,multi_class='ovr')
                 })
         
         else:
@@ -119,7 +120,10 @@ if file:
         st.dataframe(results_df)
 
         # best model
-        best_model = results_df.loc[results_df['Accuracy'].idxmax()]
+        if problem_type == 'Classification':
+            best_model = results_df.loc[results_df['Accuracy'].idxmax()]
+        else:
+            best_model = results_df.loc[results_df['R2 Score'].idxmax()]
         st.write("### :green[Best Model 🎯]")
         st.write(best_model)
 
