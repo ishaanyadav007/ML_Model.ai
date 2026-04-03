@@ -1,0 +1,8 @@
+#!/bin/sh
+'''exec' "/Users/ishaanyadav/Documents/Great Learning/Residency/Week 18 RAG and Projects/Day 4/ML_Model.ai/myenv/bin/python3" "$0" "$@"
+' '''
+import sys
+from pyright.langserver import entrypoint
+if __name__ == '__main__':
+    sys.argv[0] = sys.argv[0].removesuffix('.exe')
+    sys.exit(entrypoint())
