@@ -95,7 +95,7 @@ if file:
                     'Precision': precision_score(ytest, ypred,average='weighted'),
                     'Recall': recall_score(ytest, ypred,average='weighted'),
                     'F1 Score': f1_score(ytest, ypred,average='weighted'),
-                    'ROC AUC': roc_auc_score(ytest, yprob ,multi_class='ovr')
+                    # 'ROC AUC': roc_auc_score(ytest, yprob ,multi_class='ovr')
                 })
         
         else:
